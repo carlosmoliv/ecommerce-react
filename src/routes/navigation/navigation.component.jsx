@@ -5,7 +5,7 @@ import { ReactComponent as Logo } from "../../assets/crown.svg";
 import "./navigation.styles.scss";
 
 import { UserContext } from "../../contexts/user.context";
-import { signOutUser } from "../../firebase/firebase.utils";
+import { signOutUser } from "../../utils/firebase/firebase.utils";
 
 const Navigation = () => {
   const { currentUser } = useContext(UserContext);
