@@ -1,4 +1,3 @@
-import { isFocusable } from "@testing-library/user-event/dist/utils";
 import { createContext, useEffect, useState } from "react";
 
 const addCartItem = (cartItems, product) => {
@@ -30,6 +29,13 @@ export const ShopCartProvider = ({ children }) => {
     setCountCartItems(countCartItems + 1);
     setCartItems(addCartItem(cartItems, product));
   };
+
+  useEffect(() => {
+    const newCount = cartItems.reduce(
+      (total, item) => total + item.quantity,
+      0
+    );
+  }, [cartItems]);
 
   return (
     <ShopCartContext.Provider
