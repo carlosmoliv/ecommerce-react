@@ -6,7 +6,7 @@ import { ShopCartContext } from "../../contexts/shop-cart.context";
 import "./cart-icon.styles.scss";
 
 const CartIcon = () => {
-  const { shopCartToggle, setShopCartToggle, cartItems, countCartItems } =
+  const { shopCartToggle, setShopCartToggle, countCartItems } =
     useContext(ShopCartContext);
 
   return (
