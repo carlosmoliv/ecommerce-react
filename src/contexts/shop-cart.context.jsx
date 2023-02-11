@@ -1,26 +1,47 @@
-import { createContext, useState } from "react";
+import { isFocusable } from "@testing-library/user-event/dist/utils";
+import { createContext, useEffect, useState } from "react";
 
-export const ShopCartToggleContext = createContext({
+const addCartItem = (cartItems, product) => {
+  const productExists = cartItems.find((item) => item.id === product.id);
+
+  if (productExists) {
+    return cartItems.map((item) =>
+      item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
+    );
+  }
+
+  return [...cartItems, { ...product, quantity: 1 }];
+};
+
+export const ShopCartContext = createContext({
   shopCartToggle: false,
-  setShopCartToggle: () => false,
-});
-
-export const ShopCartItemsContext = createContext({
-  items: [],
-  setItems: () => [],
+  setShopCartToggle: () => {},
+  cartItems: [],
+  addItemToCart: () => [],
+  countCartItems: 0,
 });
 
 export const ShopCartProvider = ({ children }) => {
-  const [items, setItems] = useState([]);
+  const [cartItems, setCartItems] = useState([]);
   const [shopCartToggle, setShopCartToggle] = useState(false);
+  const [countCartItems, setCountCartItems] = useState(0);
+
+  const addItemToCart = (product) => {
+    setCountCartItems(countCartItems + 1);
+    setCartItems(addCartItem(cartItems, product));
+  };
 
   return (
-    <ShopCartToggleContext.Provider
-      value={{ shopCartToggle, setShopCartToggle }}
+    <ShopCartContext.Provider
+      value={{
+        shopCartToggle,
+        setShopCartToggle,
+        cartItems,
+        addItemToCart,
+        countCartItems,
+      }}
     >
-      <ShopCartItemsContext.Provider value={{ items, setItems }}>
-        {children}
-      </ShopCartItemsContext.Provider>
-    </ShopCartToggleContext.Provider>
+      {children}
+    </ShopCartContext.Provider>
   );
 };

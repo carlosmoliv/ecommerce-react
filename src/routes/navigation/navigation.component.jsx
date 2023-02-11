@@ -2,10 +2,7 @@ import { useContext } from "react";
 import { Outlet, Link } from "react-router-dom";
 
 import { UserContext } from "../../contexts/user.context";
-import {
-  ShopCartToggleContext,
-  ShopCartItemsContext,
-} from "../../contexts/shop-cart.context";
+import { ShopCartContext } from "../../contexts/shop-cart.context";
 import { signOutUser } from "../../utils/firebase/firebase.utils";
 
 import "./navigation.styles.scss";
@@ -15,11 +12,7 @@ import CartDropdown from "../../components/cart-dropdown/cart-dropdown.component
 
 const Navigation = () => {
   const { currentUser } = useContext(UserContext);
-
-  const { items, setItems } = useContext(ShopCartItemsContext);
-  const { shopCartToggle, setShopCartToggle } = useContext(
-    ShopCartToggleContext
-  );
+  const { shopCartToggle } = useContext(ShopCartContext);
 
   return (
     <>
@@ -43,10 +36,7 @@ const Navigation = () => {
             </Link>
           )}
 
-          <span
-            className="nav-link"
-            onClick={() => setShopCartToggle(!shopCartToggle)}
-          >
+          <span className="nav-link">
             <CartIcon />
           </span>
         </div>
