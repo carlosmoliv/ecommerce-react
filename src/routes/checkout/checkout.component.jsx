@@ -3,7 +3,12 @@ import { useContext } from "react";
 import { ShopCartContext } from "../../contexts/shop-cart.context";
 import CheckoutItem from "../../components/checkout-item/checkout-item.component";
 
-import "./checkout.styles.scss";
+import {
+  CheckoutContainer,
+  CheckoutHeader,
+  HeaderBlock,
+  Total,
+} from "./checkout.styles.js";
 
 const Checkout = () => {
   const { cartItems, checkoutTotal } = useContext(ShopCartContext);
@@ -14,33 +19,35 @@ const Checkout = () => {
   });
 
   return (
-    <div className="checkout-container">
-      <div className="checkout-header">
-        <div className="header-block">
+    <CheckoutContainer>
+      <CheckoutHeader>
+        <HeaderBlock>
           <span>Product</span>
-        </div>
-        <div className="header-block">
+        </HeaderBlock>
+
+        <HeaderBlock>
           <span>Description</span>
-        </div>
-        <div className="header-block">
+        </HeaderBlock>
+
+        <HeaderBlock>
           <span>Quantity</span>
-        </div>
-        <div className="header-block">
+        </HeaderBlock>
+
+        <HeaderBlock>
           <span>Price</span>
-        </div>
-        <div className="header-block">
+        </HeaderBlock>
+
+        <HeaderBlock>
           <span>Remove</span>
-        </div>
-      </div>
+        </HeaderBlock>
+      </CheckoutHeader>
 
       {cartItems.map((cartItem) => (
         <CheckoutItem cartItem={cartItem} key={cartItem.id} />
       ))}
 
-      <span className="total">
-        Total: {currencyFormatter.format(checkoutTotal)}
-      </span>
-    </div>
+      <Total>Total: {currencyFormatter.format(checkoutTotal)}</Total>
+    </CheckoutContainer>
   );
 };
 
