@@ -1,6 +1,6 @@
 import { useContext } from "react";
 
-import { ShopCartContext } from "../../contexts/shop-cart.context";
+import { CartContext } from "../../contexts/shop-cart.context";
 
 import {
   CartIconContainer,
@@ -9,13 +9,14 @@ import {
 } from "./cart-icon.styles.js";
 
 const CartIcon = () => {
-  const { shopCartToggle, setShopCartToggle, countCartItems } =
-    useContext(ShopCartContext);
+  const { isCartOpen, setIsCartOpen, cartCount } = useContext(CartContext);
+
+  const toggleIsCartOpen = () => setIsCartOpen(!isCartOpen);
 
   return (
-    <CartIconContainer onClick={() => setShopCartToggle(!shopCartToggle)}>
+    <CartIconContainer onClick={toggleIsCartOpen}>
       <ShoppingIcon />
-      <ItemCount>{countCartItems}</ItemCount>
+      <ItemCount>{cartCount}</ItemCount>
     </CartIconContainer>
   );
 };

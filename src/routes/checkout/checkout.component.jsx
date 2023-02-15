@@ -1,6 +1,6 @@
 import { useContext } from "react";
 
-import { ShopCartContext } from "../../contexts/shop-cart.context";
+import { CartContext } from "../../contexts/shop-cart.context";
 import CheckoutItem from "../../components/checkout-item/checkout-item.component";
 
 import {
@@ -11,7 +11,7 @@ import {
 } from "./checkout.styles.js";
 
 const Checkout = () => {
-  const { cartItems, checkoutTotal } = useContext(ShopCartContext);
+  const { cartItems, cartTotal } = useContext(CartContext);
 
   const currencyFormatter = new Intl.NumberFormat("en-US", {
     style: "currency",
@@ -46,7 +46,7 @@ const Checkout = () => {
         <CheckoutItem cartItem={cartItem} key={cartItem.id} />
       ))}
 
-      <Total>Total: {currencyFormatter.format(checkoutTotal)}</Total>
+      <Total>Total: {currencyFormatter.format(cartTotal)}</Total>
     </CheckoutContainer>
   );
 };

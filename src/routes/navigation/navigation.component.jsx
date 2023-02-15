@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { Outlet } from "react-router-dom";
 
 import { UserContext } from "../../contexts/user.context";
-import { ShopCartContext } from "../../contexts/shop-cart.context";
+import { CartContext } from "../../contexts/shop-cart.context";
 import { signOutUser } from "../../utils/firebase/firebase.utils";
 
 import { ReactComponent as Logo } from "../../assets/crown.svg";
@@ -18,7 +18,7 @@ import {
 
 const Navigation = () => {
   const { currentUser } = useContext(UserContext);
-  const { shopCartToggle } = useContext(ShopCartContext);
+  const { isCartOpen } = useContext(CartContext);
 
   return (
     <>
@@ -43,7 +43,7 @@ const Navigation = () => {
           </span>
         </NavLinks>
 
-        {shopCartToggle && <CartDropdown />}
+        {isCartOpen && <CartDropdown />}
       </NavigationContainer>
 
       <Outlet />

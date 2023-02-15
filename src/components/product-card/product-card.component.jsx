@@ -3,7 +3,7 @@ import { useContext } from "react";
 import Button, {
   BUTTON_TYPE_CLASSES,
 } from "../../components/button/button.component";
-import { ShopCartContext } from "../../contexts/shop-cart.context";
+import { CartContext } from "../../contexts/shop-cart.context";
 
 import {
   ProductCardContainer,
@@ -14,7 +14,7 @@ import {
 
 const ProductCard = ({ product }) => {
   const { name, price, imageUrl } = product;
-  const { addItemToCart } = useContext(ShopCartContext);
+  const { addItemToCart } = useContext(CartContext);
 
   const handleAddProductToCart = () => addItemToCart(product);
 
